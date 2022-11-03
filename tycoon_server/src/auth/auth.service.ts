@@ -20,7 +20,6 @@ export class AuthService {
       email: user.email,
       user_name: user.user_name,
       password: user.password,
-      phone: user.phone
     })
     return { token }
   }

@@ -1,4 +1,4 @@
-import { HttpException, Injectable, HttpStatus } from '@nestjs/common';
+import { HttpException, Injectable, HttpStatus, Get, Param, Req } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -12,6 +12,7 @@ export class UserService {
     private userRepository: Repository<User>
   ) { }
 
+  //注册逻辑
   async register(createUser: CreateUserDto) {
     const { user_name } = createUser;
 
@@ -26,16 +27,14 @@ export class UserService {
     return await this.userRepository.save(newUser);   //储存这个新用户
   }
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  @Get()
+  async getUserInfo(@Req() req) {
+    return req.user
   }
 
-  findAll() {
-    return `This action returns all user`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  //使用id查找某个人的信息
+  async findOne(id: string) {
+    return await this.userRepository.findOne({ where: { id: id } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

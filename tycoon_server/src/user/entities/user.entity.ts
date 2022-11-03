@@ -1,10 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Exclude } from 'class-transformer';
+import * as bcrypt from 'bcryptjs';
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 
 @Entity('user')
 export class User {
     @PrimaryGeneratedColumn('uuid')
-    id: number;
+    id: string;
 
     @Column({ length: 20, nullable: false })
     user_name: string;
@@ -12,9 +14,12 @@ export class User {
     @Column({ length: 60, nullable: false })
     email: string;
 
-    @Column({ nullable: false })
-    phone: number;
-
+    @Exclude()
     @Column({ length: 30, nullable: false })
     password: string
+
+    @BeforeInsert()
+    async encryptPwd() {
+        this.password = await bcrypt.hashSync(this.password)
+    }
 }
