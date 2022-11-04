@@ -13,6 +13,7 @@ export class UserController {
     return this.userService.register(createUserDto)
   }
 
+  //获取用户信息
   @Get()
   async getUserInfo(@Req() req) {
     return req.user;
