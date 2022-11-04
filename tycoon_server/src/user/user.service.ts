@@ -14,10 +14,10 @@ export class UserService {
 
   //注册逻辑
   async register(createUser: CreateUserDto) {
-    const { user_name } = createUser;
+    const { username } = createUser;
 
     const user = await this.userRepository.findOne({
-      where: { user_name },
+      where: { username },
     })
     if (user) {
       throw new HttpException("用户已存在", HttpStatus.BAD_REQUEST)   //如果用户已存在抛出错误
@@ -27,9 +27,8 @@ export class UserService {
     return await this.userRepository.save(newUser);   //储存这个新用户
   }
 
-  @Get()
-  async getUserInfo(@Req() req) {
-    return req.user
+  findAll() {
+    return `This action returns all user`;
   }
 
   //使用id查找某个人的信息

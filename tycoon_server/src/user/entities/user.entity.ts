@@ -8,16 +8,17 @@ export class User {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ length: 20, nullable: false })
-    user_name: string;
+    @Column({ length: 100, nullable: false })
+    username: string;
 
-    @Column({ length: 60, nullable: false })
+    @Column({ length: 100, nullable: false })
     email: string;
 
     @Exclude()
-    @Column({ length: 30, nullable: false })
+    @Column({ length: 100, nullable: false })
     password: string
 
+    //加密返回密码
     @BeforeInsert()
     async encryptPwd() {
         this.password = await bcrypt.hashSync(this.password)

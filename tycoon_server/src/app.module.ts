@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [AuthModule,
@@ -18,6 +19,7 @@ import { UserModule } from './user/user.module';
       synchronize: true,           //同步
     }),
     UserModule,
+    ConfigModule.forRoot({isGlobal: true}),
   ],
   controllers: [AppController],
   providers: [AppService],

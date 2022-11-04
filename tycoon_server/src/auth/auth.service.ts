@@ -18,15 +18,17 @@ export class AuthService {
     const token = this.createToken({
       id: user.id,
       email: user.email,
-      user_name: user.user_name,
+      username: user.username,
       password: user.password,
     })
     return { token }
   }
 
-  signupLocal() { }
-
   logout() { }
 
   refreshTokens() { }
+
+  async getUser(user: Partial<User>) {
+    return user 
+  }
 }
