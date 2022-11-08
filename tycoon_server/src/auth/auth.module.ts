@@ -9,6 +9,7 @@ import { UserModule } from 'src/user/user.module';
 import { ConfigService } from '@nestjs/config';
 import { LocalStorage } from './local.strategy';
 import { HttpModule } from '@nestjs/axios';
+import { JwtStorage } from './jwt.strategy';
 
 const jwtModule = JwtModule.registerAsync({
   inject: [ConfigService],
@@ -29,7 +30,7 @@ const jwtModule = JwtModule.registerAsync({
     UserModule
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStorage],
+  providers: [AuthService, LocalStorage, JwtStorage],
   exports: [jwtModule]
 })
 export class AuthModule { }
