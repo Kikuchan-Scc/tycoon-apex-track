@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 
 const login = () => {
+  const [userName, setUserName] = useState('')
+  const [passWord, setPassWord] = useState('')
+
   return (
     <div className='h-[100vh] flex overflow-hidden'>
       <div className="block px-6 py-24 shadow-lg bg-[#292a29] max-w-sm h-full w-full">
         <form>
           <Input
+            type="text"
+            state={(e: any) => setUserName(e.target.value)}
             placeholder="Username"
             text="账号"
             style_input="form-control block
@@ -27,6 +32,8 @@ const login = () => {
             style_label="form-label inline-block mb-2 text-white"
           />
           <Input
+            type="password"
+            state={(e: any) => setPassWord(e.target.value)}
             placeholder="Password"
             text="密码"
             style_input="form-control block
