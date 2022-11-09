@@ -8,6 +8,7 @@ import {
   ShieldCheckIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
 const resources = [
   {
@@ -42,7 +43,7 @@ function classNames(...classes: string[]) {
 
 export default function NavBar() {
   return (
-    <Popover className="relative bg-black">
+    <Popover className="relative bg-[#292a29]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -71,11 +72,9 @@ export default function NavBar() {
 
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <a
-              href="#"
-              className="px-4 py-4 inline-flex items-center justify-center whitespace-nowrap rounded-[50%] border-[4px] border-[#333333] bg-zinc-200 text-base font-medium text-white shadow-sm"
-            >
-            </a>
+            <Link href={'/login'}>
+              <button type="button" className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">登录</button>
+            </Link>
           </div>
         </div>
       </div>
@@ -123,9 +122,9 @@ export default function NavBar() {
               <div>
                 <a
                   href="#"
-                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-[#333333] px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#525151]"
+                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-[#292a29] px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#333333]"
                 >
-                  Sign up
+                  登录
                 </a>
               </div>
             </div>
