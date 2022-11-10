@@ -1,16 +1,60 @@
 import React, { useState } from 'react'
+import { useRouter, withRouter } from 'next/router';
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 
 const login = () => {
-  const [userName, setUserName] = useState('')
-  const [passWord, setPassWord] = useState('')
+  const [userName, setUserName] = useState<string>('')
+  const [passWord, setPassWord] = useState<string>('')
+  const router = useRouter()
+
+  async function submitForm(event: any) {
+    event.preventDefault()
+    const login = await fetch('http://localhost:3001/auth/local/signin', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: userName,
+        password: passWord
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    }).then((response) => {
+      return response.json()
+    }).then((data) => {
+      if (data.statusCode !== 401) {
+        localStorage.setItem("Token", 'Bearer ' + data.token)
+      } else {
+        return
+      }
+    })
+
+    const getUser = await fetch('http://localhost:3001/user', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem("Token") as string
+      },
+    }).then((response) => {
+      return response.json()
+    }).then((data) => {
+      if (data.statusCode !== 401) {
+        router.push('/')
+      } else {
+        return
+      }
+    })
+  }
 
   return (
     <div className='h-[100vh] flex overflow-hidden'>
       <div className="block px-6 py-24 shadow-lg bg-[#292a29] max-w-sm h-full w-full">
         <form>
           <Input
+            value={userName}
+            name='username'
             type="text"
             state={(e: any) => setUserName(e.target.value)}
             placeholder="Username"
@@ -32,6 +76,8 @@ const login = () => {
             style_label="form-label inline-block mb-2 text-white"
           />
           <Input
+            value={passWord}
+            name='password'
             type="password"
             state={(e: any) => setPassWord(e.target.value)}
             placeholder="Password"
@@ -63,7 +109,10 @@ const login = () => {
               className="text-zinc-500 hover:text-red-700 transition duration-200 ease-in-out">Forgot
               password?</a>
           </div>
-          <Button text='登录' style="
+          <Button
+            onClick={submitForm}
+            text='登录'
+            style="
           w-full
           px-6
           py-2.5
