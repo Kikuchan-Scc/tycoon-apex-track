@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useRouter, withRouter } from 'next/router';
 import Button from '../../components/Button'
 import Input from '../../components/Input'
+import fetch from '../../utils/fetch';
 
 const login = () => {
   const [userName, setUserName] = useState<string>('')
@@ -10,42 +11,34 @@ const login = () => {
 
   async function submitForm(event: any) {
     event.preventDefault()
-    const login = await fetch('http://localhost:3001/auth/local/signin', {
+    const loginRequest = fetch(`/auth/local/signin`, {
       method: 'POST',
       body: JSON.stringify({
         username: userName,
         password: passWord
       }),
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-    }).then((response) => {
-      return response.json()
-    }).then((data) => {
-      if (data.statusCode !== 401) {
-        localStorage.setItem("Token", 'Bearer ' + data.token)
-      } else {
-        return
-      }
-    })
-
-    const getUser = await fetch('http://localhost:3001/user', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem("Token") as string
+        'Accept': 'application/json',
       },
     }).then((response) => {
-      return response.json()
-    }).then((data) => {
-      if (data.statusCode !== 401) {
-        router.push('/')
-      } else {
-        return
-      }
+      response.json()
+        .then((data) => {
+          localStorage.setItem('Token', 'Bearer ' + data.token)
+        })
     })
+      .then(() => {
+        const userRequest = fetch(`/user`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("Token") as string
+          },
+        }).then((response) => {
+          response.json()
+        })
+      })
   }
 
   return (
