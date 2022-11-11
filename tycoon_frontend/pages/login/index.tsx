@@ -3,10 +3,15 @@ import { useRouter, withRouter } from 'next/router';
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import fetch from '../../utils/fetch';
+import cookie from 'react-cookies'
+import { useAtom, atom } from 'jotai';
+
+const userAtom = atom('')
+const passwordAtom = atom('')
 
 const login = () => {
-  const [userName, setUserName] = useState<string>('')
-  const [passWord, setPassWord] = useState<string>('')
+  const [userName, setUserName] = useAtom(userAtom)
+  const [passWord, setPassWord] = useAtom(passwordAtom)
   const router = useRouter()
 
   async function submitForm(event: any) {
@@ -24,21 +29,26 @@ const login = () => {
     }).then((response) => {
       response.json()
         .then((data) => {
-          localStorage.setItem('Token', 'Bearer ' + data.token)
+          cookie.save('token', data.token, { path: "/" })
+        })
+        .then(() => {
+          const userRequest = fetch(`/user`, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${cookie.load('token')}`
+            },
+          })
+            .then((response) => {
+              response.json()
+                .then((data) => {
+                  // console.log(data)
+                })
+            })
         })
     })
-      .then(() => {
-        const userRequest = fetch(`/user`, {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("Token") as string
-          },
-        }).then((response) => {
-          response.json()
-        })
-      })
+    router.push('/')
   }
 
   return (
