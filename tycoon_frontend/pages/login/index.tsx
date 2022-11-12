@@ -44,11 +44,11 @@ const login = () => {
               response.json()
                 .then((data) => {
                   // console.log(data)
+                  router.push('/')
                 })
             })
         })
     })
-    router.push('/')
   }
 
   return (

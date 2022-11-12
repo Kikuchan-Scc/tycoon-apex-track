@@ -1,10 +1,24 @@
+const Online = () => {
+  return (
+    <div>在线</div>
+  )
+}
 
+const Offline = () => {
+  return (
+    <div>离线</div>
+  )
+}
 
-export default function Home() {
+export default function Home(isLogin: any) {
 
   return (
     <div>
-      11111111
+      {isLogin.state === true ?
+        <Online />
+        :
+        <Offline />
+      }
     </div>
   )
 }
