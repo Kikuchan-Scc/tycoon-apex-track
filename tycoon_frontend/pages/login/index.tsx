@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter, withRouter } from 'next/router';
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -6,17 +6,19 @@ import fetch from '../../utils/fetch';
 import cookie from 'react-cookies'
 import { useAtom, atom } from 'jotai';
 
-const userAtom = atom('')
-const passwordAtom = atom('')
+const userAtom = atom<string>('')
+const passwordAtom = atom<string>('')
+const loadingAtom = atom<boolean>(false)
 
 const login = () => {
   const [userName, setUserName] = useAtom(userAtom)
   const [passWord, setPassWord] = useAtom(passwordAtom)
+  const [loading, setLoading] = useAtom(loadingAtom)
   const router = useRouter()
 
   async function submitForm(event: any) {
     event.preventDefault()
-    const loginRequest = fetch(`/auth/local/signin`, {
+    const loginRequest = await fetch(`/auth/local/signin`, {
       method: 'POST',
       body: JSON.stringify({
         username: userName,
@@ -26,30 +28,25 @@ const login = () => {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-    }).then((response) => {
-      response.json()
-        .then((data) => {
-          cookie.save('token', data.token, { path: "/" })
-        })
-        .then(() => {
-          const userRequest = fetch(`/user`, {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${cookie.load('token')}`
-            },
-          })
-            .then((response) => {
-              response.json()
-                .then((data) => {
-                  // console.log(data)
-                  router.push('/')
-                })
-            })
-        })
     })
+
+    const login = await loginRequest.json()
+      .then((data) => {
+        cookie.save('token', data.token, { path: "/" })
+      })
+      .then(() => {
+        if (cookie.load('token')) {
+          router.push(`/?id=${userName}`)
+        } else {
+          throw new Error("登录已过期");
+        }
+      })
   }
+
+  useEffect(() => {
+    // Prefetch the dashboard page
+    router.prefetch('/')
+  }, [])
 
   return (
     <div className='h-[100vh] flex overflow-hidden'>

@@ -5,7 +5,9 @@ import { useRouter, withRouter } from 'next/router';
 import NavBar from '../components/NavBar';
 import { atom, useAtom } from 'jotai';
 import cookie from 'react-cookies'
+import fetch from '../utils/fetch'
 import { useEffect } from 'react';
+import NextNProgress from 'nextjs-progressbar';
 
 const login = atom(false)
 
@@ -24,8 +26,24 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, [])
 
+  // const userRequest = fetch(`/user`, {
+  //   method: 'GET',
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json',
+  //     'Authorization': `Bearer ${cookie.load('token')}`
+  //   },
+  // })
+  //   .then((response) => {
+  //     response.json()
+  //       .then((data) => {
+  //         console.log(data)
+  //       })
+  //   })
+
   return (
     <div>
+      <NextNProgress color='red' />
       {router.asPath === '/login' ?
         ''
         :

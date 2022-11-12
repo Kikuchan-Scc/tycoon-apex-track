@@ -1,8 +1,9 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Button = (props: any) => {
     return (
-        <button onClick={props.onClick} type="submit" className={props.style}>{props.text}</button>
+        <button onClick={props.onClick} className={props.style}>{props.text}</button>
     )
 }
 
