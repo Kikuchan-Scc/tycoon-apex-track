@@ -5,15 +5,17 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import DropDown from './DropDown'
+import Search from './Search'
 
-const Online = () => {
+const Online = ({ props }: any) => {
   return (
     <Popover className="relative bg-[#292a29]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+      <div className="mx-auto max-w-[110rem] px-4 sm:px-6">
+        <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only"></span>
               <img
                 className="h-8 w-auto sm:h-10"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -34,12 +36,17 @@ const Online = () => {
             <a href="#" className="text-base font-medium text-white hover:text-gray-200">
               Docs
             </a>
-
           </Popover.Group>
+
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Link href={'/login'}>
-              <button type="button" className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">登录</button>
-            </Link>
+            <Search />
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
+              className="rounded-full w-8 shadow-lg"
+              alt="Avatar"
+            />
+            <DropDown props={props} />
+            {/* <button type="button" className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">注销</button> */}
           </div>
         </div>
       </div>
@@ -194,11 +201,10 @@ const Offline = () => {
   )
 }
 
-export default function NavBar(isLogin: any) {
-  // console.log(isLogin)
+export default function NavBar({ props, state }: any) {
   return (
-    isLogin.state === true ?
-      <Online />
+    state === true ?
+      <Online props={props} />
       :
       <Offline />
   )

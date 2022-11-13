@@ -8,8 +8,10 @@ import cookie from 'react-cookies'
 import fetch from '../utils/fetch'
 import { useEffect } from 'react';
 import NextNProgress from 'nextjs-progressbar';
+import SearchBar from '../components/SearchBar';
 
 const login = atom(false)
+const Data = atom([])
 
 type Prop = {
   [key: string]: any;
@@ -18,28 +20,30 @@ type Prop = {
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const [isLogin, setLogin] = useAtom(login);
+  const [userData, setUser] = useAtom(Data)
+
   useEffect(() => {
     if (cookie.load('token')) {
       setLogin(true)
     } else {
       setLogin(false)
     }
+    const userRequest = fetch(`/user`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${cookie.load('token')}`
+      },
+    })
+      .then((response) => {
+        response.json()
+          .then((data) => {
+            setUser(data)
+          })
+      })
   }, [])
 
-  // const userRequest = fetch(`/user`, {
-  //   method: 'GET',
-  //   headers: {
-  //     'Accept': 'application/json',
-  //     'Content-Type': 'application/json',
-  //     'Authorization': `Bearer ${cookie.load('token')}`
-  //   },
-  // })
-  //   .then((response) => {
-  //     response.json()
-  //       .then((data) => {
-  //         console.log(data)
-  //       })
-  //   })
 
   return (
     <div>
@@ -47,7 +51,9 @@ export default function App({ Component, pageProps }: AppProps) {
       {router.asPath === '/login' ?
         ''
         :
-        <NavBar state={isLogin} />
+        <div>
+          <NavBar state={isLogin} props={userData} />
+        </div>
       }
       <Component state={isLogin} {...pageProps} />
     </div>

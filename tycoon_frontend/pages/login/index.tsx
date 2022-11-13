@@ -5,6 +5,7 @@ import Input from '../../components/Input'
 import fetch from '../../utils/fetch';
 import cookie from 'react-cookies'
 import { useAtom, atom } from 'jotai';
+import next from 'next';
 
 const userAtom = atom<string>('')
 const passwordAtom = atom<string>('')
@@ -32,21 +33,23 @@ const login = () => {
 
     const login = await loginRequest.json()
       .then((data) => {
+        console.log(data)
         cookie.save('token', data.token, { path: "/" })
+      }).catch((err) => {
+        throw new Error(err);
       })
-      .then(() => {
-        if (cookie.load('token')) {
-          router.push(`/?id=${userName}`)
-        } else {
-          throw new Error("登录已过期");
-        }
-      })
-  }
 
-  useEffect(() => {
-    // Prefetch the dashboard page
-    router.prefetch('/')
-  }, [])
+    try {
+      if (cookie.load('token')) {
+        router.push('/')
+      } else {
+        throw new Error("错误");
+
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <div className='h-[100vh] flex overflow-hidden'>
