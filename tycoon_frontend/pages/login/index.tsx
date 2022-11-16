@@ -17,7 +17,7 @@ const login = () => {
   const [loading, setLoading] = useAtom(loadingAtom)
   const router = useRouter()
 
-  async function submitForm(event: any) {
+  async function submitForm(event: any, news: any) {
     event.preventDefault()
     const loginRequest = await fetch(`/auth/local/signin`, {
       method: 'POST',
@@ -33,23 +33,14 @@ const login = () => {
 
     const login = await loginRequest.json()
       .then((data) => {
-        console.log(data)
         cookie.save('token', data.token, { path: "/" })
+        router.push('/')
       }).catch((err) => {
         throw new Error(err);
       })
-
-    try {
-      if (cookie.load('token')) {
-        router.push('/')
-      } else {
-        throw new Error("错误");
-
-      }
-    } catch (err) {
-      console.log(err)
-    }
   }
+
+
 
   return (
     <div className='h-[100vh] flex overflow-hidden'>

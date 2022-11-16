@@ -1,12 +1,18 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
+import { useRouter, withRouter } from 'next/router';
+import fetch from '../utils/fetch';
 import Link from 'next/link'
 import DropDown from './DropDown'
 import Search from './Search'
+import cookie from 'react-cookies'
+import { atom, useAtom } from 'jotai'
+
+const login = atom(false)
 
 const Online = ({ props }: any) => {
   return (
@@ -110,8 +116,8 @@ const Online = ({ props }: any) => {
 const Offline = () => {
   return (
     <Popover className="relative bg-[#292a29]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+      <div className="mx-auto max-w-[110rem] px-4 sm:px-6">
+        <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
               <span className="sr-only">Your Company</span>
@@ -201,11 +207,49 @@ const Offline = () => {
   )
 }
 
-export default function NavBar({ props, state }: any) {
-  return (
-    state === true ?
-      <Online props={props} />
-      :
+const Data = atom([])
+
+export default function NavBar({ props }: any) {
+  const [isLogin, setLogin] = useAtom(login);
+  const [userData, setUser] = useAtom(Data);
+  const router = useRouter()
+
+  useEffect(() => {
+    if (cookie.load('token')) {
+      setLogin(true)
+        if(cookie.load('token')){
+            const userRequest = fetch(`/user`, {
+                method: 'GET',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${cookie.load('token')}`
+                },
+              })
+                .then((response) => {
+                  response.json()
+                    .then((data) => {
+                      setUser(data)
+                      console.log(data)
+                    })
+                })
+        } else {
+            return
+        }
+    } else {
+      setLogin(false)
+    }
+  }, [])
+
+  if (isLogin === true) {
+    return (
+      <Online props={userData} />
+    )
+  } else {
+    return (
       <Offline />
-  )
+    )
+  }
 }
+
+
