@@ -10,25 +10,15 @@ import NextNProgress from 'nextjs-progressbar';
 import { useEffect } from 'react';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter()
+    const router = useRouter()
 
     const showHeader = router.pathname === '/login' ? false : true;
     return (
         <div>
             <NextNProgress color='red' />
             {showHeader && <NavBar />}
-            <Component />
+            <Component {...pageProps} />
         </div>
     )
 }
-
-// async function getServerSideProps(context:any) {
-//     // Fetch data from external API
-//     const res = await fetch(`https://www.muanana7mi.top/api/shop`)
-//     const data = await res.json()
-//     console.log(context.req.cookies.token)
-  
-//     // Pass data to the page via props
-//     return { props: { data } }
-//   }
 

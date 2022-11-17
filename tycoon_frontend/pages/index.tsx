@@ -1,15 +1,15 @@
-import { useRouter } from "next/router"
 import Article from "../components/Article"
 import fetch from "../utils/fetch"
 import Card from "../components/Card"
+import { GetServerSideProps, InferGetServerSidePropsType } from "next"
 
-const Home = ({ news }: any) => {
-    console.log(news)
+function Home({ news }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    // console.log(news)
     return (
         <div className="bg-[#151719]">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12 py-7">
                 <p className="text-4xl text-[#d9e3ea]">关注APEX最新消息</p>
-                <Card />
+                    <Card news={news} />
             </div>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12 py-7">
                 <p className="text-4xl text-[#d9e3ea]">大家在讨论</p>
@@ -26,16 +26,15 @@ const Home = ({ news }: any) => {
 
 export default Home
 
-// export const getServerSideProps = async () => {
-//     const res = await fetch(`/api/news`, {
-//         method: 'GET',
-//     })
-//     const news = await res.json()
+export const getServerSideProps: GetServerSideProps = async () => {
+    const res = await fetch(`/api/news`, {
+        method: 'GET',
+    })
+    const news = await res.json()
 
-//     // console.log(context.req.cookies.token)
-//     return {
-//         props: {
-//             news: news
-//         }
-//     }
-// }
+    return {
+        props: {
+            news: news
+        }
+    }
+};
