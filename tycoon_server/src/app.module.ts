@@ -6,6 +6,9 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { NewsModule } from './news/news.module';
+import { TopicModule } from './topic/topic.module';
+import { CommentsModule } from './comments/comments.module';
+import { ReplyModule } from './reply/reply.module';
 
 @Module({
   imports: [AuthModule,
@@ -22,6 +25,9 @@ import { NewsModule } from './news/news.module';
     UserModule,
     ConfigModule.forRoot({isGlobal: true}),
     NewsModule,
+    TopicModule,
+    CommentsModule,
+    ReplyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
