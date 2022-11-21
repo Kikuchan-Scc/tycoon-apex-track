@@ -1,5 +1,6 @@
 import { HttpException, Injectable, HttpStatus, Get, Param, Req } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Post } from 'src/posts/entities/post.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -8,8 +9,8 @@ import { User } from './entities/user.entity';
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User)
-    private userRepository: Repository<User>
+    @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectRepository(Post) private postRepository: Repository<Post>,
   ) { }
 
   //注册逻辑
@@ -18,6 +19,7 @@ export class UserService {
 
     const user = await this.userRepository.findOne({
       where: { username },
+
     })
     if (user) {
       throw new HttpException("用户已存在", HttpStatus.BAD_REQUEST)   //如果用户已存在抛出错误
@@ -27,13 +29,12 @@ export class UserService {
     return await this.userRepository.save(newUser);   //储存这个新用户
   }
 
-  findAll() {
-    return `This action returns all user`;
-  }
-
   //使用id查找某个人的信息
   async findOne(id: string) {
-    return await this.userRepository.findOne({ where: { id: id } });
+    return await this.userRepository.findOne({
+      where: { id: id },
+      relations: ['posts']
+    });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

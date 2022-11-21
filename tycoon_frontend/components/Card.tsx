@@ -16,43 +16,40 @@ export default function Card({ news }: any) {
     console.log(news)
     return (
         <>
-            <Swiper
-                spaceBetween={30}
-                effect={"fade"}
-                navigation={true}
-                autoplay={{
-                    delay: 8000,
-                    disableOnInteraction: true,
-                }}
-                pagination={{
-                    clickable: true,
-                }}
-                modules={[EffectFade, Navigation, Pagination, Autoplay]}
-                className="mySwiper"
-            >
-                {news.map((e: any) => {
-                    return (
-                        <SwiperSlide>
-                            <div className="">
-                                <div className="flex flex-col md:flex-row bg-[#151719] shadow-lg">
-                                    <div className=' md:w-[50%] relative'>
-                                        <img className="absolute right-5 bottom-5 w-full h-96 object-cover" src={e.img} alt="" />
-                                        <div className="bg-[#25282c] w-full h-96 object-cover"></div>
+            <div className="shadow-lg">
+                <Swiper
+                    spaceBetween={30}
+                    effect={"fade"}
+                    navigation={true}
+                    autoplay={{
+                        delay: 8000,
+                        disableOnInteraction: true,
+                    }}
+
+                    modules={[EffectFade, Navigation, Pagination, Autoplay]}
+                    className="mySwiper"
+                >
+                    {news.map((e: any) => {
+                        return (
+                            <SwiperSlide>
+                                <div className="flex flex-col md:flex-row bg-[#151719]">
+                                    <div className='md:w-[50%] md:h-full  relative h-full'>
+                                        <img className=" md:right-5 md:bottom-5 w-full h-96 object-cover" src={e.img} alt="" />
                                     </div>
-                                    <div className="p-6 flex flex-col justify-start">
+                                    <div className="md:w-[50%] md:h-full h-[250px]  p-6">
                                         <Link href={e.link}>
-                                            <strong className="text-[#cad3da] text-3xl mb-2 hover:underline ">{e.title}</strong>
+                                            <strong className="text-[#cad3da] text-3xl hover:underline ">{e.title}</strong>
                                         </Link>
-                                        <p className="text-[#8c99a2] text-base mb-4">
+                                        <p className="text-[#8c99a2] text-base">
                                             {e.short_desc}
                                         </p>
                                     </div>
                                 </div>
-                            </div>
-                        </SwiperSlide>
-                    )
-                })}
-            </Swiper>
+                            </SwiperSlide>
+                        )
+                    })}
+                </Swiper>
+            </div>
         </>
     );
 }

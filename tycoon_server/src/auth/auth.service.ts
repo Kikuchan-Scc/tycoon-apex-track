@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/user/entities/user.entity';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private userService: UserService,
   ) { }
 
   createToken(user: Partial<User>) {
@@ -20,6 +20,7 @@ export class AuthService {
       email: user.email,
       username: user.username,
       // password: user.password,
+      posts: user.posts
     })
     return { token }
   }
@@ -29,6 +30,6 @@ export class AuthService {
   refreshTokens() { }
 
   async getUser(user: Partial<User>) {
-    return user 
+    return await this.userService.findOne(user.id)
   }
 }

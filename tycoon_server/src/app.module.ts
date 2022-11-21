@@ -6,12 +6,11 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { NewsModule } from './news/news.module';
-import { TopicModule } from './topic/topic.module';
-import { CommentsModule } from './comments/comments.module';
-import { ReplyModule } from './reply/reply.module';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [AuthModule,
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       // host: 'localhost',
@@ -21,13 +20,12 @@ import { ReplyModule } from './reply/reply.module';
       database: 'postgres',
       autoLoadEntities: true,     //自动加载实体
       synchronize: true,           //同步
-    }),
+      entities: [__dirname + '/../**/*.entity.{ts}']
+    },
+    ),
     UserModule,
-    ConfigModule.forRoot({isGlobal: true}),
     NewsModule,
-    TopicModule,
-    CommentsModule,
-    ReplyModule,
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
