@@ -14,11 +14,3 @@ export class CreateUserDto {
   @IsNotEmpty({ message: "请输入密码" })
   password: string;
 }
-
-export class UserRO {
-  id: string;
-  username: string;
-  created: Date;
-  token?: string;
-  posts?: Post[];
-}

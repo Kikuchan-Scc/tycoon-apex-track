@@ -19,7 +19,6 @@ export class UserService {
 
     const user = await this.userRepository.findOne({
       where: { username },
-
     })
     if (user) {
       throw new HttpException("用户已存在", HttpStatus.BAD_REQUEST)   //如果用户已存在抛出错误
@@ -41,7 +40,11 @@ export class UserService {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const existUser = await this.postRepository.findOne({ where: { id: id } });
+    if (!existUser) {
+      throw new HttpException(`${id}已经不存在`, HttpStatus.BAD_REQUEST)
+    }
+    return await this.postRepository.remove(existUser)
   }
 }

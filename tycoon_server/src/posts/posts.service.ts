@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { User } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -13,12 +12,12 @@ export class PostsService {
     @InjectRepository(Post) private postRepository: Repository<Post>,
     @InjectRepository(User) private userRepository: Repository<User>,
   ) { }
-  async create(id: string, createPostDto: CreatePostDto) {
+  async create(authorId: string, post: CreatePostDto) {
     const user = await this.userRepository.findOne({
-      where: { id: id },
+      where: { id: authorId },
     })
     const newPost = await this.postRepository.create({
-      ...createPostDto,
+      ...post,
       author: user
     })
     return this.postRepository.save(newPost)
@@ -38,7 +37,11 @@ export class PostsService {
     return `This action updates a #${id} post`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  async remove(id: string) {
+    const existPost = await this.postRepository.findOne({ where: { id: id } });
+    if (!existPost) {
+      throw new HttpException(`${id}已经不存在`, HttpStatus.BAD_REQUEST)
+    }
+    return await this.postRepository.remove(existPost)
   }
 }

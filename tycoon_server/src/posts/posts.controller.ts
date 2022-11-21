@@ -2,10 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UsePipes,
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import { UserService } from 'src/user/user.service';
-import { CreateUserDto } from 'src/user/dto/create-user.dto';
-import { AuthGuard } from '@nestjs/passport';
-import { User } from 'src/user/entities/user.entity';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('posts')
 export class PostsController {
@@ -14,9 +11,8 @@ export class PostsController {
   ) { }
 
   @Post()
-  // @UseGuards(AuthGuard())
-  @UsePipes(new ValidationPipe())
-  create(user ,@Body() createPostDto: CreatePostDto) {
+  @UseGuards(JwtAuthGuard)
+  create(user, @Body() createPostDto: CreatePostDto) {
     return this.postsService.create(user, createPostDto);
   }
 
@@ -31,12 +27,12 @@ export class PostsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postsService.update(+id, updatePostDto);
+  async update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
+    return await this.postsService.update(+id, updatePostDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.postsService.remove(+id);
+  async remove(@Param('id') id) {
+    return await this.postsService.remove(id)
   }
 }
