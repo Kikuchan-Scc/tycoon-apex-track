@@ -19,7 +19,6 @@ export class User {
     @Column({ length: 100, nullable: false })
     password: string
 
-
     @OneToMany(type => Post, post => post.author)
     posts: Post[]
 

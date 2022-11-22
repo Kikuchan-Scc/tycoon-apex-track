@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards } fro
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('user')
@@ -20,8 +19,6 @@ export class UserController {
   async getUserInfo(@Req() req) {
     return req.user;
   }
-
-
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {

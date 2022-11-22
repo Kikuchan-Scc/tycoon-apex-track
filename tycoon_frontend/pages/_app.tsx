@@ -8,6 +8,7 @@ import NavBar from '../components/NavBar';
 import fetch from '../utils/fetch'
 import NextNProgress from 'nextjs-progressbar';
 import { useEffect } from 'react';
+import Footer from '../components/Footer';
 
 export default function App({ Component, pageProps }: AppProps) {
     const router = useRouter()
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <NextNProgress color='red' />
             {showHeader && <NavBar />}
             <Component {...pageProps} />
+            {showHeader && <Footer />}
         </div>
     )
 }

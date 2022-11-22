@@ -50,10 +50,6 @@ export class PostsService {
     });
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
-  }
-
   async remove(id: string) {
     const existPost = await this.postRepository.findOne({ where: { id: id } });
     if (!existPost) {
