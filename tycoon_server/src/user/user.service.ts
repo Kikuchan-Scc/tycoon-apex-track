@@ -42,7 +42,7 @@ export class UserService {
 
   async remove(id: string) {
     const existUser = await this.postRepository.findOne({ where: { id: id } });
-    if (!existUser) {
+    if (existUser) {
       throw new HttpException(`${id}已经不存在`, HttpStatus.BAD_REQUEST)
     }
     return await this.postRepository.remove(existUser)

@@ -27,6 +27,6 @@ export class Post {
     @CreateDateColumn()
     create: Date
 
-    @ManyToOne(type => User, (user) => user.posts)
-    author: User
+    @ManyToOne((type) => User, (user) => user.username)
+    author: User;
 }

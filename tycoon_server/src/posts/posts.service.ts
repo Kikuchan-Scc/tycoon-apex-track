@@ -12,15 +12,32 @@ export class PostsService {
     @InjectRepository(Post) private postRepository: Repository<Post>,
     @InjectRepository(User) private userRepository: Repository<User>,
   ) { }
-  async create(authorId: string, post: CreatePostDto) {
-    const user = await this.userRepository.findOne({
-      where: { id: authorId },
-    })
-    const newPost = await this.postRepository.create({
+
+  async create(user, post: CreatePostDto): Promise<number> {
+    const { title } = post
+    if (!title) {
+      throw new HttpException('缺少文章标题', HttpStatus.BAD_REQUEST);
+    }
+
+    const doc = await this.postRepository.findOne({
+      where: { title },
+    });
+    if (doc) {
+      throw new HttpException('文章已存在', HttpStatus.BAD_REQUEST);
+    }
+
+    let { coverUrl } = post;
+
+    const postParam: Partial<Post> = {
       ...post,
-      author: user
-    })
-    return this.postRepository.save(newPost)
+      author: user,
+    };
+
+    const newPost: Post = await this.postRepository.create({
+      ...postParam,
+    });
+    const created = await this.postRepository.save(newPost);
+    return Number(created.id);
   }
 
   async findAll() {
