@@ -47,6 +47,7 @@ export class PostsService {
   async findOne(id: string) {
     return await this.postRepository.findOne({
       where: { id: id },
+      relations: ['author']
     });
   }
 

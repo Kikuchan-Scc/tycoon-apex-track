@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import Chips from './Chips'
 
@@ -6,11 +7,12 @@ const Article = ({ post }: any) => {
     return (
         post.slice(0, 4).map((e: any) => {
             return (
+
                 <div className="flex justify-center">
                     <div className="rounded-lg shadow-lg bg-[#151719] max-w-sm">
-                        <a href="#!">
+                        <Link href={'/posts/' + e.id}>
                             <img className="rounded-t-lg" src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" alt="" />
-                        </a>
+                        </Link>
                         <div className="p-6">
                             <p className="text-[#8c99a2] text-base mb-4">
                                 {e.content}
@@ -19,6 +21,7 @@ const Article = ({ post }: any) => {
                         </div>
                     </div>
                 </div>
+
             )
         })
     )
