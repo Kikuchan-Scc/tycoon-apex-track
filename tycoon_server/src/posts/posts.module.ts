@@ -10,4 +10,4 @@ import { User } from 'src/user/entities/user.entity';
   controllers: [PostsController],
   providers: [PostsService]
 })
-export class PostsModule {}
+export class PostsModule { }

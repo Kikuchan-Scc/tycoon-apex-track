@@ -47,8 +47,13 @@ export class PostsService {
   async findOne(id: string) {
     return await this.postRepository.findOne({
       where: { id: id },
-      relations: ['author']
+      relations: ['author', 'likes']
     });
+
+  }
+
+  update(id: number, updateUserDto: UpdatePostDto) {
+    return `This action updates a #${id} user`;
   }
 
   async remove(id: string) {

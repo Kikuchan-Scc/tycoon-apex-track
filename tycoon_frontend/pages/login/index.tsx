@@ -5,7 +5,6 @@ import Input from '../../components/Input'
 import fetch from '../../utils/fetch';
 import cookie from 'react-cookies'
 import { useAtom, atom } from 'jotai';
-import next from 'next';
 
 const userAtom = atom<string>('')
 const passwordAtom = atom<string>('')

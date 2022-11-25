@@ -1,29 +1,39 @@
+import { atom, useAtom } from 'jotai'
 import React from 'react'
+import Post from '../../components/Post'
 import RichTextEditor from '../../components/RichTextEditor'
+import { useRouter } from 'next/router'
 import fetch from '../../utils/fetch'
 
+const likeCountAtom = atom<number>(0)
+const isLikeAtom = atom<boolean>(false)
+
 const Posts = (posts: any) => {
-    console.log(posts)
+    const [likeCounts, setLikeCount] = useAtom(likeCountAtom)
+    const [isLike, setIsLike] = useAtom(isLikeAtom)
+    const router = useRouter()
+    const { slug } = router.query
+
+    async function submitForm() {
+        const likeRequest = await fetch(`/posts/list/` + slug[0], {
+            method: 'PATCH',
+            body: JSON.stringify({
+                likeCounts: likeCounts,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+        })
+    }
+
     return (
         <div>
-            <div className='px-96 py-5'>
-                <p className='text-5xl'>{posts.posts.title}</p>
-                <div className='flex items-center space-x-3 pt-5'>
-                    <img
-                        src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
-                        className="rounded-full w-10 shadow-lg"
-                        alt="Avatar"
-                    />
-                    <div>
-                        <p>{posts.posts.author.username}</p>
-                        <p>{posts.posts.create}</p>
-                    </div>
-                </div>
-                <p className='pt-5'>
-                    {posts.posts.content}
-                </p>
+            <div className='px-64 py-5 bg-[#151719]'>
+                <p className='text-3xl text-[#d9e3ea] px-5'>{posts.posts.title}</p>
+                <Post posts={posts} likeCounts={likeCounts} setLikeCount={setLikeCount} isLike={isLike} setIsLike={setIsLike} submitForm={submitForm} />
+                <RichTextEditor />
             </div>
-            <RichTextEditor />
         </div>
     )
 }
@@ -35,6 +45,7 @@ export async function getServerSideProps(context: any) {
         method: 'GET',
     })
     const posts = await getPosts.json()
+
     return {
         props: {
             posts: posts,
