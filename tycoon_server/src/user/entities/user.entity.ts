@@ -2,6 +2,7 @@ import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcryptjs';
 import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { Post } from 'src/posts/entities/post.entity';
+import { Comment } from 'src/comments/entities/comment.entity';
 
 
 @Entity('user')
@@ -21,6 +22,12 @@ export class User {
 
     @OneToMany(type => Post, post => post.author)
     posts: Post[]
+
+    @OneToMany(
+        type => Comment,
+        comment => comment.author,
+      )
+      comments: Comment[];
 
     //加密返回密码
     @BeforeInsert()

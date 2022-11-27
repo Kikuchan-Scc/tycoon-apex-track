@@ -3,7 +3,6 @@ import React from 'react'
 import Chips from './Chips'
 
 const Article = ({ post }: any) => {
-    console.log(post)
     return (
         post.slice(0, 4).map((e: any) => {
             return (
@@ -15,7 +14,7 @@ const Article = ({ post }: any) => {
                         </Link>
                         <div className="p-6">
                             <p className="text-[#8c99a2] text-base mb-4">
-                                {e.content}
+                                {e.title}
                             </p>
                             <Chips author={e.author} />
                         </div>

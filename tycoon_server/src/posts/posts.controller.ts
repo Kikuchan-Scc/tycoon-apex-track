@@ -3,11 +3,13 @@ import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { CommentsService } from 'src/comments/comments.service';
 
 @Controller('posts')
 export class PostsController {
   constructor(
     private readonly postsService: PostsService,
+    private readonly commentService: CommentsService
   ) { }
 
   @Post()
@@ -22,11 +24,11 @@ export class PostsController {
   }
 
   @Get('list/:id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string, @Req() req) {
     return await this.postsService.findOne(id);
   }
 
-  @Patch('list/:id')
+  @Post('list/:id')
   update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
     return this.postsService.update(+id, updatePostDto);
   }

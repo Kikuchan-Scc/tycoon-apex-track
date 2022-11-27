@@ -1,3 +1,4 @@
+import { Comment } from "src/comments/entities/comment.entity";
 import { User } from "src/user/entities/user.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -22,11 +23,14 @@ export class Post {
 
     // 点赞量
     @Column({ type: 'int', default: 0, name: 'like_count' })
-    likeCount: number;
+    likeCounts: number;
 
     @CreateDateColumn()
     create: Date
 
     @ManyToOne((type) => User, (user) => user.username)
     author: User;
+
+    @OneToMany(type => Comment, comment => comment.post, { cascade: true })
+    comments: Comment[]
 }
