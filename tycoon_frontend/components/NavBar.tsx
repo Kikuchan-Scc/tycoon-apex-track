@@ -230,7 +230,6 @@ export default function NavBar({ props }: any) {
                   response.json()
                     .then((data) => {
                       setUser(data)
-                      console.log(data)
                     })
                 })
         } else {

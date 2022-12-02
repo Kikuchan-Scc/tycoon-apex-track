@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Chips = (e: any) => {
-    console.log(e.username)
     return (
         <div className="flex flex-wrap justify-start space-x-2">
             <span

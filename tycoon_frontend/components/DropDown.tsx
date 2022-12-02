@@ -8,7 +8,6 @@ function classNames(...classes) {
 }
 
 export default function DropDown({ props }: any) {
-    console.log(props)
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
@@ -27,7 +26,6 @@ export default function DropDown({ props }: any) {
                 leaveTo="transform opacity-0 scale-95"
             >
                 <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-[#333333] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-
                     <div className="py-1">
                         <strong className='block px-4 py-2 text-sm text-[#b4bbc3]'>
                             {props.username}

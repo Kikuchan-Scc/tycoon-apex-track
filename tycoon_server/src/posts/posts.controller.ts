@@ -5,14 +5,14 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CommentsService } from 'src/comments/comments.service';
 
-@Controller('posts')
+@Controller('api/posts')
 export class PostsController {
   constructor(
     private readonly postsService: PostsService,
     private readonly commentService: CommentsService
   ) { }
 
-  @Post()
+  @Post('/list')
   @UseGuards(JwtAuthGuard)
   async create(@Body() createPostDto: CreatePostDto, @Req() req) {
     return this.postsService.create(req.user, createPostDto);

@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     })
     const news = await getNews.json()
 
-    const getPosts = await fetch(`/posts/list`, {
+    const getPosts = await fetch(`/api/posts/list`, {
         method: 'GET',
     })
     const post = await getPosts.json()

@@ -13,7 +13,6 @@ import { Autoplay, EffectFade, Navigation, Pagination } from "swiper";
 import Link from "next/link";
 
 export default function Card({ news }: any) {
-    console.log(news)
     return (
         <>
             <div className="shadow-lg">

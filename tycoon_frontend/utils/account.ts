@@ -1,4 +1,3 @@
-import { UserInfo } from "../types/userInfo";
 
 export function getAllAccount() {
     const user = localStorage.getItem('user')

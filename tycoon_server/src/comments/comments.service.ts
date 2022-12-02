@@ -34,11 +34,17 @@ export class CommentsService {
     return this.toResponseObject(comment);
   }
 
-  async findAll(postId: string) {
+  async findPostById(commentId: string) {
     return await this.commentRepository.find({
-      where: { post: { id: postId } },
-      relations: ['author', 'post']
+      where: { id: commentId },
+      relations: ['author', 'post', 'reply']
     });
   }
 
+  async findCommentById(postId: string) {
+    return await this.commentRepository.find({
+      where: { post: { id: postId } },
+      relations: ['author', 'post', 'reply']
+    });
+  }
 }

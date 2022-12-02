@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { NewsModule } from './news/news.module';
 import { PostsModule } from './posts/posts.module';
 import { CommentsModule } from './comments/comments.module';
+import { ReplysModule } from './replys/replys.module';
 
 @Module({
   imports: [AuthModule,
@@ -28,6 +29,7 @@ import { CommentsModule } from './comments/comments.module';
     NewsModule,
     PostsModule,
     CommentsModule,
+    ReplysModule,
   ],
   controllers: [AppController],
   providers: [AppService],

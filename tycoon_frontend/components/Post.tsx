@@ -1,4 +1,10 @@
 import React from 'react'
+import dayjs from 'dayjs'
+import isLeapYear from 'dayjs/plugin/isLeapYear'
+import 'dayjs/locale/zh-cn' // 导入本地化语言
+
+dayjs.extend(isLeapYear) // 使用插件
+dayjs.locale('zh-cn') // 使用本地化语言
 
 const Post = ({ posts }: any) => {
     return (
@@ -11,7 +17,7 @@ const Post = ({ posts }: any) => {
                 />
                 <div>
                     <p className='text-[#8c99a2]'>{posts.author.username}</p>
-                    <p className='text-[#8c99a2]'>{posts.create}</p>
+                    <p className='text-[#8c99a2] text-[12px]'>{dayjs(posts.create).format('YYYY/MM/DD')}     {dayjs(posts.create).format('hh:mm dddd')}</p>
                 </div>
             </div>
             <p className='pt-5 text-[#d9e3ea]'>
