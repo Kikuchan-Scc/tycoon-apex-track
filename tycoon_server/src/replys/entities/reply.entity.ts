@@ -17,6 +17,6 @@ export class Reply {
     @ManyToOne(type => User, { eager: true })
     author: User;
 
-    @ManyToOne(type => Comment, comment => comment.reply)
+    @ManyToOne(type => Comment, comment => comment.reply, { eager: true })
     comments: Comment
 }

@@ -7,6 +7,7 @@ import { useRouter, withRouter } from 'next/router';
 import Button from './Button'
 import cookie from 'react-cookies'
 import { atom, useAtom } from 'jotai';
+import Alert from './Alert'
 
 const postText = atom<string>('')
 dayjs.extend(isLeapYear) // 使用插件
@@ -17,7 +18,7 @@ const Comments = ({ comments }: any) => {
   const router = useRouter()
 
   const postComments = () => {
-    const postComment = fetch(`/api/comments/post/` + router.query.slug[0], {
+    const postComment = fetch(`/api/comments/post/` + router.query.slug?.toString(), {
       method: 'POST',
       body: JSON.stringify({
         comment: text,
@@ -45,35 +46,37 @@ const Comments = ({ comments }: any) => {
       {ascending.length > 0 ?
         <div>
           {ascending.map((e: any) => {
-            console.log(e)
             return (
               <div>
-                <div className='flex pt-5 px-5 pb-5 space-x-5 items-center relative'>
+                <div className='flex pt-5 px-5 pb-5 space-x-5 items-start relative'>
                   <div>
                     <img className="rounded-full w-8 shadow-lg" src={e.author.avatar} />
                   </div>
                   <div>
                     <p className='text-red-600 text-[14px]'>{e.author.username}</p>
-                    <p className='text-[#8c99a2] text-[12px]'>{e.comment}</p>
+                    <p className='text-[#8c99a2] text-[12px] whitespace-pre-line' dangerouslySetInnerHTML={{ __html: String(e.comment).replace(/[\r\n]/g, '<br/>') }}></p>
                   </div>
-                  <div className='absolute right-0 top-0 pr-5 pt-5 flex space-x-2'>
-                    <svg className="fill-[#8c99a2]" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2703" width="20" height="20"><path d="M416 352V192L128 448l288 256V544h288v256h192V352H416z" fill="#494949" p-id="2704"></path></svg>
-                    <p className='text-[#494949] text-[14px]'>回复</p>
-                  </div>
+                  <Alert e={e} />
                   <div className='absolute right-0 bottom-0 pr-5 pb-5 flex space-x-2'>
                     <p className='text-[#494949] text-[12px]'>{dayjs(e.created).format('YYYY/MM/DD')}   {dayjs(e.created).format('hh:mm dddd')}</p>
                   </div>
                 </div>
-                {e.reply.map((res) => (
-                  <div className=' mx-9 my-5 px-8 flex space-x-5 border-l-[1px] border-[#494949] items-center relative'>
+                {e.reply.sort(function (a: any, b: any) {
+                  return a.created < b.created ? 1 : -1
+                }).map((res: any) => (
+                  <div className=' mx-9 my-5 px-8 flex space-x-5 border-l-[1px] border-[#494949] items-start relative'>
                     <div>
                       <img className='rounded-full w-8 shadow-lg' src={res.author.avatar} />
                     </div>
                     <div>
-                      <p className='text-red-600 text-[14px]'>{res.author.username}</p>
-                      <p className='text-[#8c99a2] text-[12px]'>{res.content}</p>
+                      <div className='space-x-3'>
+                        <span className='text-red-600 text-[14px]'>{res.author.username}</span>
+                        <span className='text-[#494949] text-[14px]'>回复</span>
+                        <span className='text-[#494949] text-[14px]'>@{e.author.username}</span>
+                      </div>
+                      <p className='text-[#8c99a2] text-[12px]' dangerouslySetInnerHTML={{ __html: String(res.content).replace(/[\r\n]/g, '<br/>') }}></p>
                     </div>
-                    <div className='absolute right-0 bottom-0 pr-5 pb-5 flex space-x-2'>
+                    <div className='absolute right-0 bottom-0 flex space-x-2'>
                       <p className='text-[#494949] text-[12px]'>{dayjs(res.created).format('YYYY/MM/DD')}   {dayjs(res.created).format('hh:mm dddd')}</p>
                     </div>
                   </div>
