@@ -20,8 +20,7 @@ const Post = ({ posts }: any) => {
                     <p className='text-[#8c99a2] text-[12px]'>{dayjs(posts.create).format('YYYY/MM/DD')}     {dayjs(posts.create).format('hh:mm dddd')}</p>
                 </div>
             </div>
-            <p className='pt-5 text-[#d9e3ea]'>
-                {posts.content}
+            <p className='pt-5 text-[#d9e3ea]' dangerouslySetInnerHTML={{ __html: String(posts.content).replace(/[\r\n]/g, '<br/>') }}>
             </p>
         </div>
     )

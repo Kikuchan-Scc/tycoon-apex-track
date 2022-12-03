@@ -8,7 +8,6 @@ import { useRouter, withRouter } from 'next/router';
 import fetch from '../utils/fetch';
 import Link from 'next/link'
 import DropDown from './DropDown'
-import Search from './Search'
 import cookie from 'react-cookies'
 import { atom, useAtom } from 'jotai'
 
@@ -20,7 +19,7 @@ const Online = ({ props }: any) => {
       <div className="mx-auto max-w-[110rem] px-4 sm:px-6">
         <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
+            <a href="/">
               <span className="sr-only"></span>
               <img
                 className="h-8 w-auto sm:h-10"
@@ -36,23 +35,26 @@ const Online = ({ props }: any) => {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-            <a href="#" className="text-base font-medium text-white hover:text-gray-200">
+            <a href="/" className="text-base font-medium text-white hover:text-gray-200">
               首页
             </a>
-            <a href="#" className="text-base font-medium text-white hover:text-gray-200">
-              Docs
+            <a href="/forum" className="text-base font-medium text-white hover:text-gray-200">
+              社区论坛
             </a>
           </Popover.Group>
 
-          <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <Search />
-            <img
-              src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
-              className="rounded-full w-8 shadow-lg"
-              alt="Avatar"
-            />
-            <DropDown props={props} />
-            {/* <button type="button" className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">注销</button> */}
+          <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0 space-x-10">
+            <Link href={'/compose'}>
+              <svg className="w-5 fill-[#edf4fd]" viewBox="0 0 1147 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1519"><path d="M0 956.865864 1146.877993 956.865864 1146.877993 1020.7232 0 1020.7232 0 956.865864ZM0 912.775537 300.529213 827.452006 85.868257 614.103613 0 912.775537ZM802.673951 328.370422 588.010209 115.019284 115.744481 584.378491 330.405437 797.708861 802.673951 328.370422ZM902.442885 149.154775 768.272343 15.818629C746.042941-6.277693 708.804076-5.074616 685.091594 18.484019L620.682076 82.476319 835.34721 295.826104 899.75255 231.814349C923.465032 208.254362 924.668109 171.253883 902.442885 149.154775Z" p-id="1520"></path></svg>
+            </Link>
+            <div className='flex items-center'>
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
+                className="rounded-full w-8 shadow-lg"
+                alt="Avatar"
+              />
+              <DropDown props={props} />
+            </div>
           </div>
         </div>
       </div>
@@ -87,7 +89,7 @@ const Online = ({ props }: any) => {
               <div className="mt-6">
                 <nav className="grid gap-y-8">
                   <a
-                    href='#'
+                    href='/forum'
                     className="-m-3 flex items-center rounded-md p-3 hover:bg-[#333333]"
                   >
                     <div className="h-6 w-6 flex-shrink-0 text-white-600" aria-hidden="true" />
@@ -119,7 +121,7 @@ const Offline = () => {
       <div className="mx-auto max-w-[110rem] px-4 sm:px-6">
         <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
+            <a href="/">
               <span className="sr-only">Your Company</span>
               <img
                 className="h-8 w-auto sm:h-10"
@@ -135,11 +137,11 @@ const Offline = () => {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-            <a href="#" className="text-base font-medium text-white hover:text-gray-200">
+            <a href="/" className="text-base font-medium text-white hover:text-gray-200">
               首页
             </a>
-            <a href="#" className="text-base font-medium text-white hover:text-gray-200">
-              Docs
+            <a href="/forum" className="text-base font-medium text-white hover:text-gray-200">
+              社区论坛
             </a>
 
           </Popover.Group>
@@ -217,24 +219,24 @@ export default function NavBar({ props }: any) {
   useEffect(() => {
     if (cookie.load('token')) {
       setLogin(true)
-        if(cookie.load('token')){
-            const userRequest = fetch(`/user`, {
-                method: 'GET',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${cookie.load('token')}`
-                },
+      if (cookie.load('token')) {
+        const userRequest = fetch(`/user`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${cookie.load('token')}`
+          },
+        })
+          .then((response) => {
+            response.json()
+              .then((data) => {
+                setUser(data)
               })
-                .then((response) => {
-                  response.json()
-                    .then((data) => {
-                      setUser(data)
-                    })
-                })
-        } else {
-            return
-        }
+          })
+      } else {
+        return
+      }
     } else {
       setLogin(false)
     }
