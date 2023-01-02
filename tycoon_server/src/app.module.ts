@@ -9,6 +9,9 @@ import { NewsModule } from './news/news.module';
 import { PostsModule } from './posts/posts.module';
 import { CommentsModule } from './comments/comments.module';
 import { ReplysModule } from './replys/replys.module';
+import { MapModule } from './map/map.module';
+import { CraftingModule } from './crafting/crafting.module';
+import { ShopsModule } from './shops/shops.module';
 
 @Module({
   imports: [AuthModule,
@@ -30,6 +33,9 @@ import { ReplysModule } from './replys/replys.module';
     PostsModule,
     CommentsModule,
     ReplysModule,
+    MapModule,
+    CraftingModule,
+    ShopsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

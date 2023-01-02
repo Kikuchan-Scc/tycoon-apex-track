@@ -1,26 +1,38 @@
+import { GetServerSideProps } from "next";
 import Article from "../components/Article"
-import fetch from "../utils/fetch"
 import Card from "../components/Card"
-import { GetServerSideProps, InferGetServerSidePropsType } from "next"
+import fetch from "../utils/fetch"
+import useSWR from "swr";
+import useTranslation from "next-translate/useTranslation";
 
-function Home({ news, post }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+const fetcher = (url: any) => fetch(url, {
+    method: 'GET',
+}).then((res) => res.json());
+
+export default function Home({ news }: any) {
+    const { data, error } = useSWR(
+        "/api/map",
+        fetcher,
+        { refreshInterval: 2000 }
+    );
+    if (error) return "An error has occurred.";
+    if (!data) return "Loading...";
+    let { t } = useTranslation()
+
     return (
         <div className="bg-[#151719]">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12 py-7">
-                <p className="text-4xl text-[#d9e3ea]">关注APEX最新消息</p>
+            <h1>{t("common:greeting")}</h1>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12 pt-10">
+                <p className="text-3xl text-[#d9e3ea] md:text-left text-center">官方资讯</p>
                 <Card news={news} />
             </div>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12 py-7">
-                <p className="text-4xl text-[#d9e3ea]">大家在讨论</p>
-                <div className="grid grid-cols-4 gap-5">
-                    <Article post={post} />
-                </div>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12 pt-10">
+                <p className="text-3xl text-[#d9e3ea] md:text-left text-center">地图轮换</p>
+                <Article maps={data} />
             </div>
         </div>
     )
 }
-
-export default Home
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const getNews = await fetch(`/api/news`, {
@@ -28,15 +40,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
     })
     const news = await getNews.json()
 
-    const getPosts = await fetch(`/api/posts/list`, {
-        method: 'GET',
-    })
-    const post = await getPosts.json()
-
     return {
         props: {
             news: news,
-            post: post
         }
     }
 };
