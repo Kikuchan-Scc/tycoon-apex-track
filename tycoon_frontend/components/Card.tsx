@@ -15,7 +15,7 @@ import Link from "next/link";
 export default function Card({ news }: any) {
     return (
         <>
-            <div className="shadow-lg">
+            <div className="shadow-lg hidden sm:block">
                 <Swiper
                     spaceBetween={30}
                     effect={"fade"}
@@ -32,7 +32,7 @@ export default function Card({ news }: any) {
                         return (
                             <SwiperSlide>
                                 <div className="flex flex-col md:flex-row bg-[#151719]">
-                                    <div className='md:w-[50%] md:h-full  relative h-full'>
+                                    <div className='md:w-[50%] md:h-full relative h-full'>
                                         <img className=" md:right-5 md:bottom-5 w-full h-96 object-cover" src={e.img} alt="" />
                                     </div>
                                     <div className="md:w-[50%] md:h-full h-[250px]  p-6">

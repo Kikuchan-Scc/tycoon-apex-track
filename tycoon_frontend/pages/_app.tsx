@@ -4,9 +4,10 @@ import type { AppProps } from 'next/app'
 import { useRouter, withRouter } from 'next/router';
 import NavBar from '../components/NavBar';
 import NextNProgress from 'nextjs-progressbar';
+import { appWithTranslation } from 'next-i18next'
 import Footer from '../components/Footer';
 
-export default function App({ Component, pageProps }: AppProps) {
+function MyApp ({ Component, pageProps }: AppProps) {
     const router = useRouter()
 
     const showHeader = router.pathname === '/login' ? false : true;
@@ -19,4 +20,6 @@ export default function App({ Component, pageProps }: AppProps) {
         </div>
     )
 }
+
+export default appWithTranslation(MyApp)
 

@@ -32,7 +32,7 @@
     "app/login/index.tsx",
     "pages/_app.tsx",
     ".next/types/**/*.ts"
-  ],
+, "pages/about.js"  ],
   "exclude": [
     "node_modules"
   ]

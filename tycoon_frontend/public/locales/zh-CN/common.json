@@ -1,0 +1,21 @@
+{
+  "title": {
+    "News": "官方资讯",
+    "Map Rotation": "地图轮换"
+  },
+  "mapRotation": {
+    "map": {
+      "Broken Moon": "破碎月亮",
+      "Olympus": "奥林匹斯",
+      "World's Edge": "世界尽头",
+      "Kings Canyon": "诸王峡谷"
+    },
+    "areaMap": {
+      "Phase runner": "相位穿梭器",
+      "Party crasher": "派对破坏者",
+      "Overflow": "熔岩流",
+      "Encore":"再来一次",
+      "Habitat": "栖息地4"
+    }
+  }
+}

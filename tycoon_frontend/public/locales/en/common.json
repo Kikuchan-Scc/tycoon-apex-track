@@ -1,0 +1,21 @@
+{
+  "title": {
+    "News": "News",
+    "Map Rotation": "Map Rotation"
+  },
+  "mapRotation": {
+    "map": {
+      "Broken Moon": "Broken Moon",
+      "Olympus": "Olympus",
+      "World's Edge": "World's Edge",
+      "Kings Canyon": "Kings Canyon"
+    },
+    "areaMap": {
+      "Phase runner": "Phase Runner",
+      "Party crasher": "Party Crasher",
+      "Overflow": "Overflow",
+      "Encore":"Encore",
+      "Habitat": "Habitat"
+    }
+  }
+}

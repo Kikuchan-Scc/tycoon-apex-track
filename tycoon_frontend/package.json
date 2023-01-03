@@ -12,22 +12,19 @@
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.12",
     "@sweetalert2/theme-dark": "^5.0.15",
-    "@types/node": "18.11.9",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
-    "daisyui": "^2.42.1",
     "dayjs": "^1.11.6",
     "jotai": "^1.9.2",
     "next": "13.0.1",
     "next-i18next": "^13.0.2",
-    "next-translate": "^1.6.0",
     "nextjs-progressbar": "^0.0.14",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sweetalert2": "^11.6.15",
     "swiper": "^8.4.4",
     "swr": "^2.0.0",
-    "typescript": "4.8.4"
+    "typescript": "^4.8.4"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
