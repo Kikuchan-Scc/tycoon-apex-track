@@ -2,17 +2,27 @@ import React from 'react'
 import fetch from "../../utils/fetch"
 import { GetServerSideProps } from 'next'
 import Image from 'next/image'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 
 const crafting = ({ crafting }: any) => {
+    const { t } = useTranslation('common')
     console.log(crafting)
     return (
         <div className="bg-[#151719]">
             {crafting.map((e: any) => (
-                <div>
-                    <p>{e.bundleType}</p>
-                    <div>
+                <div className=' space-y-5 pt-5'>
+                    <p className='text-center text-2xl text-[#d9e3ea]'>{t(`crafting.title.${e.bundleType}`)}</p>
+                    <div className='flex flex-col items-center space-y-3'>
                         {e.bundleContent.map((item: any) => (
-                            <Image src={item.itemType.asset} className="rounded-t-lg h-36 w-full object-cover" width={500} height={500} alt='' />
+                            <div className='flex justify-center w-[80%] xl:w-[30%] md:w-[50%] shadow-lg'>
+                                <Image src={item.itemType.asset} className="rounded-l-lg w-[30%] h-[30%] object-cover" width={500} height={500} alt='' />
+                                <div className='w-[70%] p-2 space-y-2'>
+                                    <p className='md:text-[16px] text-[14px] text-[#8c99a2]'>{t(`crafting.rotation.${item.itemType.name}`)}</p>
+                                    <p className='md:text-[14px] text-[12px] text-[#8c99a2]'>{t(`crafting.rarity.${item.itemType.rarity}`)}</p>
+                                    <p className='md:text-[14px] text-[12px] text-[#8c99a2] text-opacity-50'>{t(`crafting.title.cost`)}：{item.cost}</p>
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -23,7 +33,9 @@ const crafting = ({ crafting }: any) => {
 
 export default crafting
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({
+    locale,
+}) => {
     const getCrafting = await fetch(`/api/crafting`, {
         method: 'GET',
     })
@@ -32,6 +44,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
         props: {
             crafting: crafting,
+            ...(await serverSideTranslations(locale ?? 'en', [
+                'common',
+            ])),
         }
     }
 };

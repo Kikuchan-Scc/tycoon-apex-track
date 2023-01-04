@@ -6,11 +6,6 @@ import Card from "../components/Card"
 import fetch from "../utils/fetch"
 import useSWR from "swr";
 import { useRouter } from "next/router";
-import Link from "next/link";
-
-type Props = {
-    // Add custom props here
-}
 
 const fetcher = (url: any) => fetch(url, {
     method: 'GET',
@@ -26,6 +21,7 @@ export default function Home({ news }: any) {
         fetcher,
         { refreshInterval: 2000 }
     );
+
     if (error) return "An error has occurred.";
     if (!data) return "Loading...";
 
@@ -48,7 +44,7 @@ export default function Home({ news }: any) {
     )
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({
+export const getServerSideProps: GetServerSideProps = async ({
     locale,
 }) => {
     const getNews = await fetch(`/api/news`, {

@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { CreateShopDto } from './dto/create-shop.dto';
-import { UpdateShopDto } from './dto/update-shop.dto';
+import { CreateStoreDto } from './dto/create-store.dto';
+import { UpdateStoreDto } from './dto/update-store.dto';
 import { HttpService } from '@nestjs/axios';
 
 @Injectable()
-export class ShopsService {
+export class StoreService {
   constructor(private readonly httpService: HttpService) { }
-  create(createShopDto: CreateShopDto) {
-    return 'This action adds a new shop';
+  create(createStoreDto: CreateStoreDto) {
+    return 'This action adds a new store';
   }
 
   async findAll() {
@@ -21,14 +21,14 @@ export class ShopsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} shop`;
+    return `This action returns a #${id} store`;
   }
 
-  update(id: number, updateShopDto: UpdateShopDto) {
-    return `This action updates a #${id} shop`;
+  update(id: number, updateStoreDto: UpdateStoreDto) {
+    return `This action updates a #${id} store`;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} shop`;
+    return `This action removes a #${id} store`;
   }
 }

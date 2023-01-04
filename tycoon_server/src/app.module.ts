@@ -12,6 +12,8 @@ import { ReplysModule } from './replys/replys.module';
 import { MapModule } from './map/map.module';
 import { CraftingModule } from './crafting/crafting.module';
 import { ShopsModule } from './shops/shops.module';
+import { StoreModule } from './store/store.module';
+import { ServerStatusModule } from './server-status/server-status.module';
 
 @Module({
   imports: [AuthModule,
@@ -36,6 +38,8 @@ import { ShopsModule } from './shops/shops.module';
     MapModule,
     CraftingModule,
     ShopsModule,
+    StoreModule,
+    ServerStatusModule,
   ],
   controllers: [AppController],
   providers: [AppService],

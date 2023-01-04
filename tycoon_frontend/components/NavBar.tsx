@@ -67,21 +67,21 @@ export default function NavBar({ props }: any) {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="sm:block hidden space-x-10 md:flex">
-            <a href="/" className="text-base font-medium text-white hover:text-gray-200">
+            <Link href="/" className="text-base font-medium text-white hover:text-gray-200">
               首页
-            </a>
-            <a href="/" className="text-base font-medium text-white hover:text-gray-200">
+            </Link>
+            <Link href="/" className="text-base font-medium text-white hover:text-gray-200">
               官方资讯
-            </a>
-            <a href="/" className="text-base font-medium text-white hover:text-gray-200">
+            </Link>
+            <Link href="/store" className="text-base font-medium text-white hover:text-gray-200">
               本期商店
-            </a>
-            <a href="/" className="text-base font-medium text-white hover:text-gray-200">
+            </Link>
+            <Link href="/crafting" className="text-base font-medium text-white hover:text-gray-200">
               制造器轮换
-            </a>
-            <a href="/" className="text-base font-medium text-white hover:text-gray-200">
+            </Link>
+            <Link href="/" className="text-base font-medium text-white hover:text-gray-200">
               服务器状态
-            </a>
+            </Link>
           </Popover.Group>
 
         </div>
@@ -116,36 +116,36 @@ export default function NavBar({ props }: any) {
               </div>
               <div className="mt-6 relative z-[999]">
                 <nav className="grid gap-y-8 relative z-50">
-                  <a
+                  <Link
                     href='#'
                     className="-m-3 flex items-center rounded-md p-3 hover:bg-[#333333] text-base font-medium text-white hover:text-gray-200"
                   >
                     首页
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href='#'
                     className="-m-3 flex items-center rounded-md p-3 hover:bg-[#333333] text-base font-medium text-white hover:text-gray-200"
                   >
                     官方资讯
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href='#'
                     className="-m-3 flex items-center rounded-md p-3 hover:bg-[#333333] text-base font-medium text-white hover:text-gray-200"
                   >
                     本期商店
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href='#'
                     className="-m-3 flex items-center rounded-md p-3 hover:bg-[#333333] text-base font-medium text-white hover:text-gray-200"
                   >
                     制造器轮换
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href='#'
                     className="-m-3 flex items-center rounded-md p-3 hover:bg-[#333333] text-base font-medium text-white hover:text-gray-200"
                   >
                     服务器状态
-                  </a>
+                  </Link>
                 </nav>
               </div>
             </div>

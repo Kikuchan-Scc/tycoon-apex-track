@@ -14,8 +14,54 @@
       "Phase runner": "Phase Runner",
       "Party crasher": "Party Crasher",
       "Overflow": "Overflow",
-      "Encore":"Encore",
+      "Encore": "Encore",
       "Habitat": "Habitat"
+    }
+  },
+  "crafting": {
+    "title": {
+      "daily": "daily",
+      "weekly": "weekly",
+      "permanent": "permanent",
+      "cost": "Cost"
+    },
+    "rotation": {
+      "extended_heavy_mag": "Extended heavy mag",
+      "anvil_receiver": "Anvil receiver",
+      "barrel_stabilizer": "Barrel stabilizer",
+      "turbocharger": "Turbocharger",
+      "optic_hcog_bruiser": "Optic hcog bruiser",
+      "laser_sight": "Laser sight",
+      "optic_digital_threat": "Optic digital threat",
+      "extended_light_mag": "Extended light mag",
+      "standard_stock": "Standard stock",
+      "optic_variable_sniper": "Optic variable sniper",
+      "extended_sniper_mag": "Extended sniper mag",
+      "optic_variable_aog": "Optic variable aog",
+      "optic_hcog_ranger": "Optic hcog ranger",
+      "sniper_stock": "Sniper stock",
+      "skullpiercer_rifling": "Skullpiercer rifling",
+      "extended_energy_mag": "Extended energy mag",
+      "shotgun_bolt": "Shotgun bolt",
+      "double_tap_trigger": "Double tap trigger",
+      "knockdown_shield": "Knockdown shield",
+      "mobile_respawn_beacon": "Mobile respawn beacon",
+      "backpack": "Backpack",
+      "helmet": "Helmet",
+      "med_kit": "Med kit",
+      "large_shield_cell": "Large shield cell",
+      "ammo": "Ammo",
+      "evo_armor": "Evo armor",
+      "peacekeeper": "Peacekeeper",
+      "spitfire": "Spitfire",
+      "volt": "Volt",
+      "winman": "Winman"
+    },
+    "rarity": {
+      "Common": "Common",
+      "Rare": "Rare",
+      "Epic": "Epic",
+      "Legendary": "Legendary"
     }
   }
 }

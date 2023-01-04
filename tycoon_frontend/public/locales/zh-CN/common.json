@@ -14,8 +14,54 @@
       "Phase runner": "相位穿梭器",
       "Party crasher": "派对破坏者",
       "Overflow": "熔岩流",
-      "Encore":"再来一次",
+      "Encore": "再来一次",
       "Habitat": "栖息地4"
+    }
+  },
+  "crafting": {
+    "title": {
+      "daily": "每日",
+      "weekly": "每周",
+      "permanent": "赛季",
+      "cost": "点数"
+    },
+    "rotation": {
+      "extended_heavy_mag": "加长重型弹匣",
+      "anvil_receiver": "铁砧接收器",
+      "barrel_stabilizer": "枪管稳定器",
+      "turbocharger": "涡轮增压器",
+      "optic_hcog_bruiser": "二倍全息衍射式瞄准镜",
+      "laser_sight": "激光瞄准镜",
+      "optic_digital_threat": "单倍数字化威胁",
+      "extended_light_mag": "加长式轻型弹匣",
+      "standard_stock": "标准枪托",
+      "optic_variable_sniper": "四倍至八倍可调节式狙击手",
+      "extended_sniper_mag": "加长狙击弹匣",
+      "optic_variable_aog": "二倍至四倍可调节式高级光学瞄准镜",
+      "optic_hcog_ranger": "三倍全息衍射式瞄准镜",
+      "sniper_stock": "狙击枪枪托",
+      "skullpiercer_rifling": "穿颅器",
+      "extended_energy_mag": "加长能量弹匣",
+      "shotgun_bolt": "霰弹枪枪栓",
+      "double_tap_trigger": "双发扳机",
+      "knockdown_shield": "击倒护盾",
+      "mobile_respawn_beacon": "移动重生信标",
+      "backpack": "背包",
+      "helmet": "头盔",
+      "med_kit": "医疗箱",
+      "large_shield_cell": "护盾电池",
+      "ammo": "子弹",
+      "evo_armor": "进化护盾",
+      "peacekeeper": "和平捍卫者",
+      "spitfire": "喷火轻机枪",
+      "volt": "电能冲锋枪",
+      "winman": "辅助手枪"
+    },
+    "rarity": {
+      "Common": "普通",
+      "Rare": "稀有",
+      "Epic": "史诗",
+      "Legendary": "传说"
     }
   }
 }
