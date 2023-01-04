@@ -117,7 +117,7 @@ export default function NavBar({ props }: any) {
               <div className="mt-6 relative z-[999]">
                 <nav className="grid gap-y-8 relative z-50">
                   <Link
-                    href='#'
+                    href='/'
                     className="-m-3 flex items-center rounded-md p-3 hover:bg-[#333333] text-base font-medium text-white hover:text-gray-200"
                   >
                     首页
@@ -129,13 +129,13 @@ export default function NavBar({ props }: any) {
                     官方资讯
                   </Link>
                   <Link
-                    href='#'
+                    href='/store'
                     className="-m-3 flex items-center rounded-md p-3 hover:bg-[#333333] text-base font-medium text-white hover:text-gray-200"
                   >
                     本期商店
                   </Link>
                   <Link
-                    href='#'
+                    href='/crafting'
                     className="-m-3 flex items-center rounded-md p-3 hover:bg-[#333333] text-base font-medium text-white hover:text-gray-200"
                   >
                     制造器轮换

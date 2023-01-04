@@ -12,15 +12,15 @@ dayjs.locale('zh-cn') // 使用本地化语言
 const Article = ({ maps, t }: any) => {
     console.log(maps)
     return (
-        <div className="sm:flex sm:space-x-4 sm:space-y-0 space-y-5 justify-center pb-7">
+        <div className="sm:grid md:grid-cols-4 sm:grid-cols-2 sm:gap-4 sm:space-y-0 space-y-5 justify-center pb-7">
             <div className="rounded-lg w-full shadow-lg bg-[#151719] sm:max-w-sm">
                 <Image width={500} height={500} className="rounded-t-lg h-36 w-full object-cover" src={maps.battle_royale.current.asset} alt="" />
                 <div className="p-6 space-y-5">
                     <div>
-                        <p className="text-[#8c99a2] text-base">
+                        <p className="text-[#8c99a2] lg:text-base text-[10px]">
                             当前匹配：{t(`mapRotation.map.${maps.battle_royale.current.map}`)}
                         </p>
-                        <p className="text-[#8c99a2] text-base">
+                        <p className="text-[#8c99a2] lg:text-base text-[10px]">
                             剩余时间：{maps.battle_royale.current.remainingTimer}
                         </p>
                     </div>
@@ -33,10 +33,10 @@ const Article = ({ maps, t }: any) => {
                 <Image width={500} height={500} className="rounded-t-lg h-36 w-full object-cover" src={maps.ranked.current.asset} alt="" />
                 <div className="p-6 space-y-5">
                     <div>
-                        <p className="text-[#8c99a2] text-base">
+                        <p className="text-[#8c99a2] lg:text-base text-[10px]">
                             当前排位：{t(`mapRotation.map.${maps.ranked.current.map}`)}
                         </p>
-                        <p className="text-[#8c99a2] text-base">
+                        <p className="text-[#8c99a2] lg:text-base text-[10px]">
                             剩余时间：{maps.ranked.current.remainingTimer}
                         </p>
                     </div>
@@ -49,10 +49,10 @@ const Article = ({ maps, t }: any) => {
                 <Image width={500} height={500} className="rounded-t-lg h-36 w-full object-cover" src={maps.arenas.current.asset} alt="" />
                 <div className="p-6 space-y-5">
                     <div>
-                        <p className="text-[#8c99a2] text-base">
+                        <p className="text-[#8c99a2] lg:text-base text-[10px]">
                             当前竞技场匹配：{t(`mapRotation.areaMap.${maps.arenas.current.map}`)}
                         </p>
-                        <p className="text-[#8c99a2] text-base">
+                        <p className="text-[#8c99a2] lg:text-base text-[10px]">
                             剩余时间：{maps.arenas.current.remainingTimer}
                         </p>
                     </div>
@@ -65,10 +65,10 @@ const Article = ({ maps, t }: any) => {
                 <Image width={500} height={500} className="rounded-t-lg h-36 w-full object-cover" src={maps.arenasRanked.current.asset} alt="" />
                 <div className="p-6 space-y-5">
                     <div>
-                        <p className="text-[#8c99a2] text-base">
+                        <p className="text-[#8c99a2] lg:text-base text-[10px]">
                             当前竞技场排位：{t(`mapRotation.areaMap.${maps.arenasRanked.current.map}`)}
                         </p>
-                        <p className="text-[#8c99a2] text-base">
+                        <p className="text-[#8c99a2] lg:text-base text-[10px]">
                             剩余时间：{maps.arenasRanked.current.remainingTimer}
                         </p>
                     </div>

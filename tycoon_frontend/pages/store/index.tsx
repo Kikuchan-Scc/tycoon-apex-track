@@ -17,10 +17,7 @@ const index = ({ store }: any) => {
                 <div className=' grid 2xl:grid-cols-6 xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4'>
                     {store.map((e: any) => (
                         <div key={e.id} className='h-[400px] rounded-lg shadow-lg bg-[#151719]'>
-                            <div className='h-full relative'>
-                                <div className=' absolute right-0 top-0 bg-black bg-opacity-20 h-[35px] flex justify-center items-center px-2'>
-                                    <p className='text-white text-center text-[12px] text-opacity-60'>剩余时间：{e.expireTimestamp * 1000}</p>
-                                </div>
+                            <div className='h-full'>
                                 <div className='h-[80%] p-5'>
                                     <img className='h-full object-contain mx-auto' src={e.asset} />
                                 </div>
@@ -37,6 +34,7 @@ const index = ({ store }: any) => {
                                             <p className='text-white text-[13px] text-opacity-80'>{shops.quantity}</p>
                                         </div>
                                     ))}
+                                    <p className='text-[#8c99a2] text-opacity-50 text-[12px]'>剩余时间：{e.expireTimestamp * 1000}</p>
                                 </div>
                             </div>
                         </div>
