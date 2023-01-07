@@ -12,7 +12,9 @@ const crafting = ({ crafting }: any) => {
         <div className="bg-[#151719]">
             {crafting.map((e: any) => (
                 <div className=' space-y-5 pt-5'>
-                    <p className='text-center text-2xl text-[#d9e3ea]'>{t(`crafting.title.${e.bundleType}`)}</p>
+                    <div className='py-10 '>
+                        <p className='text-center text-white text-[25px] text-opacity-80'>{t(`crafting.title.${e.bundleType}`)}</p>
+                    </div>
                     <div className='flex flex-col items-center space-y-3'>
                         {e.bundleContent.map((item: any) => (
                             <div className='flex justify-center w-[80%] xl:w-[30%] md:w-[50%] shadow-lg'>

@@ -60,12 +60,12 @@ export default function NavBar({ props }: any) {
               />
             </a>
           </div>
-          <div className="-my-2 -mr-2 sm:hidden">
-            <Popover.Button className="inline-flex items-center justify-center rounded-md bg-[#333333] p-2 text-gray-400 hover:bg-[#333333] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500">
-              <span className="sr-only">Open menu</span>
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-            </Popover.Button>
-          </div>
+            <div className="-my-2 -mr-2 sm:hidden">
+              <Popover.Button className="inline-flex items-center justify-center rounded-md bg-[#333333] p-2 text-gray-400 hover:bg-[#333333] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500">
+                <span className="sr-only">Open menu</span>
+                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+              </Popover.Button>
+            </div>
           <Popover.Group as="nav" className="sm:block hidden space-x-10 md:flex">
             <Link href="/" className="text-base font-medium text-white hover:text-gray-200">
               首页
@@ -79,11 +79,7 @@ export default function NavBar({ props }: any) {
             <Link href="/crafting" className="text-base font-medium text-white hover:text-gray-200">
               制造器轮换
             </Link>
-            <Link href="/" className="text-base font-medium text-white hover:text-gray-200">
-              服务器状态
-            </Link>
           </Popover.Group>
-
         </div>
       </div>
 
@@ -140,18 +136,10 @@ export default function NavBar({ props }: any) {
                   >
                     制造器轮换
                   </Link>
-                  <Link
-                    href='#'
-                    className="-m-3 flex items-center rounded-md p-3 hover:bg-[#333333] text-base font-medium text-white hover:text-gray-200"
-                  >
-                    服务器状态
-                  </Link>
                 </nav>
               </div>
             </div>
             <div className="space-y-6 py-6 px-5">
-
-
             </div>
           </div>
         </Popover.Panel>

@@ -12,7 +12,7 @@ const nextConfig = {
     esmExternals, // https://nextjs.org/blog/next-11-1#es-modules-support
   },
   images: {
-        domains: ['apexlegendsstatus.com', 'legion.apexlegendsstatus.com'],
+        domains: ['apexlegendsstatus.com', 'legion.apexlegendsstatus.com','media.contentapi.ea.com'],
     },
   i18n,
   reactStrictMode: true,
