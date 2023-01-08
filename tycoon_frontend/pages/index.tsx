@@ -34,7 +34,7 @@ export default function Home({ news }: any) {
     return (
         <div className="bg-[#151719]">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12 pt-10">
-            <Search />
+                <Search />
                 {/* <p className="text-3xl text-[#d9e3ea] md:text-left text-center hidden sm:block">{t('title.News')}</p> */}
                 <Card news={news} />
             </div>

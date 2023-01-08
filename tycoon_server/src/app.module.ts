@@ -13,6 +13,8 @@ import { MapModule } from './map/map.module';
 import { CraftingModule } from './crafting/crafting.module';
 import { StoreModule } from './store/store.module';
 import { ServerStatusModule } from './server-status/server-status.module';
+import { UidModule } from './uid/uid.module';
+import { PlayerModule } from './player/player.module';
 
 @Module({
   imports: [AuthModule,
@@ -38,6 +40,8 @@ import { ServerStatusModule } from './server-status/server-status.module';
     CraftingModule,
     StoreModule,
     ServerStatusModule,
+    UidModule,
+    PlayerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
