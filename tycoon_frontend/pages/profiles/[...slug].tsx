@@ -5,6 +5,9 @@ import Image from 'next/image'
 
 
 const Profiles = ({ uid, player }: any) => {
+    const arr = Object.entries(player.legends.all)
+    console.log(arr)
+    console.log(uid)
     console.log(player)
     return (
         <div className='bg-[#151719] py-10'>
@@ -14,7 +17,7 @@ const Profiles = ({ uid, player }: any) => {
                         <img className='h-56 w-full object-cover' src={player.legends.selected.ImgAssets.banner} alt='' />
                         <div className='bg-black bg-opacity-60 w-full h-full absolute top-0 left-0'></div>
                     </div>
-                    <div className='h-24 bg-[#1e1f22] relative space-x-5'>
+                    <div className='h-24 relative space-x-5'>
                         <div className='border-[3px] rounded-[50%] absolute w-[100px] h-[100px] top-[-50px] left-[50px]'>
                             <img className='rounded-[50%] bg-black' src={uid.avatar} />
                         </div>
@@ -24,6 +27,9 @@ const Profiles = ({ uid, player }: any) => {
                         <div className=' absolute top-[10px] left-[150px] flex space-x-5'>
                             <p className='text-center text-[16px] text-[#cad3da]'>Lvl {player.global.level}</p>
                             <p className='text-center text-[16px] text-[#cad3da]'>当前状态： {player.realtime.currentState}</p>
+                        </div>
+                        <div className=' absolute top-[10px] right-[150px] flex space-x-5'>
+                            <p className='text-center text-[16px] text-[#cad3da] text-opacity-40'>群隐私： {player.realtime.lobbyState}</p>
                         </div>
                     </div>
                 </div>
@@ -70,15 +76,53 @@ const Profiles = ({ uid, player }: any) => {
                                         <p className='text-[#cad3da] text-center'>{player.club.name}</p>
                                         <p className='text-[#cad3da] text-center'>{player.club.tag}</p>
                                     </div>
-                                    <div className='w-[50%]'>
-                                        <p className='text-[#cad3da] font-bold text-center'>{player.club.maxGroupSize}</p>
+                                    <div className='w-[50%] flex'>
+                                        <p className='text-[#cad3da] font-bold text-center leading-[42px] w-[50%]'>{player.club.maxGroupSize}/{player.club.groupSize}</p>
+                                        <p className='text-[#cad3da] font-bold text-center leading-[42px] w-[50%]'>{player.club.maxGroupSize}/{player.club.groupSize}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className='h-full w-[70%] bg-[#1e1f22] shadow-lg'>
-                        111
+                    <div className='h-full w-[70%] bg-[#141516] shadow-lg p-2'>
+                        <p className='pb-2 text-[#cad3da]'>当前选择英雄</p>
+                        <div className='bg-[#17181a] flex items-center p-2'>
+                            <div className='w-full'>
+                                <div className='space-y-5'>
+                                    <div className='flex bg-[#1e1f22]'>
+                                        <img className='w-[200px]' src={player.legends.selected.ImgAssets.icon} />
+                                        <div className='p-5 space-y-5 w-full'>
+                                            <p className='text-[#cad3da]'>{player.legends.selected.LegendName}</p>
+                                            <div className='grid grid-cols-3 gap-10'>
+                                                {player.legends.selected.data.map((e: any) => (
+                                                    <p className='text-sm text-[#cad3da]'>{e.key}</p>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p className='pb-2 pt-2 text-[#cad3da]'>当前选择英雄</p>
+                        <div className='bg-[#17181a] w-full flex items-center p-2'>
+                            <div>
+                                <div className='space-y-5'>
+                                    {arr.map((e: any) => (
+                                        <div className='flex bg-[#1e1f22]'>
+                                            <img className='w-[200px]' src={e[1].ImgAssets.icon} />
+                                            <div className='p-5 space-y-5 w-full'>
+                                                <p className='text-[#cad3da]'>{e[0]}</p>
+                                                <div className='grid grid-cols-3 gap-10'>
+                                                    {e[1].data?.map((s: any) => (
+                                                        <p className='text-sm text-[#cad3da]'>{s.key}: {s.value}</p>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
